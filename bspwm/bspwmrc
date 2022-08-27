@@ -2,7 +2,7 @@
 
 pgrep -x sxhkd > /dev/null || sxhkd &
 
-bspc monitor -d I II III IV V VI VII VIII
+bspc monitor -d I II III IV V VI VII VIII IX 
 
 bspc config border_width         2
 bspc config window_gap          10
@@ -10,41 +10,21 @@ bspc config window_gap          10
 bspc config split_ratio          0.5
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
-bspc config pointer_follows_focus true
 bspc config focus_follows_pointer true
-bspc config ignore_ewmh_focus true
 
 bspc rule -a Chromium desktop='^2'
 bspc rule -a discord desktop='^3'
 bspc rule -a Steam desktop='^4'
 bspc rule -a PolyMC desktop='^4'
+bspc rule -a spotify desktop='^5'
 bspc rule -a Screenkey manage=off
-
-
 # Border
 bspc config focused_border_color        "#fcba03"
 bspc config normal_border_color         "#8314e3"
 bspc config active_border_color         "#8314e3"
-
-#
-# Autostart
-#
-# Set display from arandr saved script
-sh ~/.screenlayout/monitor.sh &
-# Bar
-~/.config/polybar/launch.sh &
-# Notifications
-/usr/bin/dunst &
-# Polkit
-/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-# Wallpaper
+$Autostart
+picom -CGb --no-fading-openclose &
 nitrogen --restore &
-# Dex
-dex -a -s /etc/xdg/autostart/:~/.config/autostart/  
-# Picom
-picom -CGb &
-# Network Applet
-nm-applet --indicator &
-
-# Cursor
-xsetroot -cursor_name left_ptr 
+nm-applet --indicatior &
+usr/bin/dunst &
+polybar
